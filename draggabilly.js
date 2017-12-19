@@ -451,6 +451,12 @@ proto.disable = function() {
   }
 };
 
+proto.forceDrop = function() {
+  if (this.isDragging) {
+    this.onmouseup({ target: this.element });
+  }
+};
+
 proto.destroy = function() {
   this.disable();
   // reset styles
