@@ -260,6 +260,42 @@ proto.pointerMove = function( event, pointer ) {
   this._dragMove( event, pointer, moveVector );
 };
 
+var super_pointerDown = proto._pointerDown;
+proto._pointerDown  = function( event, pointer ) {
+  if (this.options.disableMultiTouch && pointer.identifier > 0) {
+    return;
+  }
+
+  super_pointerDown.apply( this, arguments );
+};
+
+var super_pointerMove = proto._pointerMove;
+proto._pointerMove  = function( event, pointer ) {
+  if (this.options.disableMultiTouch && pointer.identifier > 0) {
+    return;
+  }
+  
+  super_pointerMove.apply( this, arguments );
+};
+
+var super_pointerUp = proto._pointerUp;
+proto._pointerUp  = function( event, pointer ) {
+  if (this.options.disableMultiTouch && pointer.identifier > 0) {
+    return;
+  }
+  
+  super_pointerUp.apply( this, arguments );
+};
+
+var super_pointerCancel = proto._pointerCancel;
+proto._pointerCancel  = function( event, pointer ) {
+  if (this.options.disableMultiTouch && pointer.identifier > 0) {
+    return;
+  }
+  
+  super_pointerCancel.apply( this, arguments );
+};
+
 /**
  * drag start
  * @param {Event} event
